@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hot Restaurant-Make Reservation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1><i class="fas fa-h-square"></i> <u> Hot Restaurant </u> <i class="fas fa-utensils"></i> </h1>
+            <hr>
+            <h3> Make your reservation at the hottest restaurant in town!</h3>
+            <div class="row mt-5">
+                <div class="col-7">
+                    <a href="/viewtables"><button class="btn btn-primary btn-lg" id="view-table-btn">
+                            <i class="fas fa-list"></i> View Tables
+                        </button></a>
+                </div>
+                <div class="col-5">
+                    <a href="/"><button class="btn btn-default btn-lg" id="home-btn"> <i class="fas fa-home"></i>
+                        </button></a>
+                </div>
+            </div>
+        </div>
+        <!-- Table Form To Make Reservations-->
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Table Reservation</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="name" class="form-control" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input type="phone-number" class="form-control" id="phone-number">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="unique-id">Unique ID</label>
+                            <input type="unique-id" class="form-control" id="unique-id">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+            
+                $("#submit").on("click", function(event) {
+                    event.preventDefault()
+                    let addedTable = {
+                        customerName: $("#name").val().trim(),
+                        customerEmail: $("#email").val().trim(),
+                        phoneNumber: $("#phone-number").val().trim(),
+                        customerID: $("#unique-id").val().trim()
+                    }
+
+                    $.post("/api/reservations", addedTable)
+                        .then(function(data) {
+                            console.log("make-reservation.html", data);
+                            alert("Adding your name to the list.")
+                        })
+
+                })
+            </script>
+</body>
+
+</html>
